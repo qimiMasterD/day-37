@@ -1,0 +1,44 @@
+.item {
+    display: flex;
+    align-items: center;
+    padding: 12px 10px;
+    border-radius: 8px;
+    gap: 12px;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #1618230d;
+    }
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.text {
+    font-size: 1.4rem;
+    color: #1a1a1a;
+    line-height: 1.4;
+}
+
+.name {
+    font-weight: 600;
+}
+
+.time {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #f2552c;
+}

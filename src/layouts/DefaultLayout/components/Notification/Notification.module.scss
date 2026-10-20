@@ -1,0 +1,27 @@
+.container {
+    font-family: "Be Vietnam Pro", sans-serif;
+    position: relative;
+}
+
+.icon {
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: rgba(240, 81, 35, 0.08);
+
+        i {
+            color: #b73710;
+        }
+    }
+
+    i {
+        transform: translateY(2px);
+        font-size: 1.8rem;
+        color: rgba(0, 0, 0, 0.6);
+        transition: color 0.3s ease;
+    }
+}

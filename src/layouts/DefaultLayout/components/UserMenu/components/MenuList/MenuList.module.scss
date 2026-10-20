@@ -1,0 +1,19 @@
+.menu {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px 0;
+    font-size: 1.4rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+    li {
+        cursor: pointer;
+        color: rgba(0, 0, 0, 0.6);
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: black;
+        }
+    }
+}

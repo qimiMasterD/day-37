@@ -1,0 +1,29 @@
+.container {
+    font-family: "Be Vietnam Pro", sans-serif;
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+    padding: 8px 20px;
+    border-radius: 999px;
+    border: 3px solid #f2f4f7;
+    position: relative;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.6;
+    font-size: 1.8rem;
+}
+
+.input {
+    font-family: inherit;
+    min-width: 400px;
+    padding: 5px;
+    font-size: 1.7rem;
+    border: none;
+    outline: none;
+    background-color: none;
+    caret-color: #f05123;
+}

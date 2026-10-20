@@ -1,0 +1,25 @@
+.container {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    width: 400px;
+    z-index: 999;
+    box-shadow: 0 -4px 32px #0003;
+    border-radius: 8px;
+    background-color: white;
+    padding: 15px 20px;
+
+    h4 {
+        font-weight: 600;
+        font-size: 1.5rem;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+}
+
+.notifications-list {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

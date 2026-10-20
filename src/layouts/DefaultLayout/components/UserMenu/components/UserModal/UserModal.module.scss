@@ -1,0 +1,43 @@
+.container {
+    font-family: "Be Vietnam Pro", sans-serif;
+    position: absolute;
+    top: 110%;
+    right: 0;
+    width: 300px;
+    z-index: 999;
+    box-shadow: 0 -4px 32px #0003;
+    border-radius: 8px;
+    background-color: white;
+    padding: 15px 20px;
+}
+
+.header {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.avatar {
+    width: 70px;
+    overflow: hidden;
+    padding: 5px;
+    img {
+        width: 100%;
+        border-radius: 50%;
+    }
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .name {
+        font-weight: 600;
+        font-size: 1.5rem;
+    }
+    .username {
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 1.4rem;
+    }
+}
