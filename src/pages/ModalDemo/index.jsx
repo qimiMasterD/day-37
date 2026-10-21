@@ -95,8 +95,8 @@ function ModalDemo() {
             <Modal
                 isOpen={activeModal === "customClass"}
                 onRequestClose={closeModal}
-                className="my-custom-modal"
-                overlayClassName="my-custom-overlay"
+                className={styles["my-custom-modal"]}
+                overlayClassName={styles["my-custom-overlay"]}
             >
                 <h2>Custom ClassName Modal</h2>
                 <p>
