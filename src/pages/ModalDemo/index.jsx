@@ -83,7 +83,6 @@ function ModalDemo() {
                     possimus dolorum pariatur ipsum alias cumque quo totam,
                     officia fugiat explicabo.
                 </p>
-                <button onClick={() => setIsBasicModalOpen(false)}>Đóng</button>
             </Modal>
         </div>
     );

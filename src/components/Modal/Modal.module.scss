@@ -1,3 +1,23 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 .container {
     position: fixed;
     z-index: 999;
@@ -12,6 +32,14 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+    opacity: 1;
+    animation: fadeIn var(--close-timeout, 0ms) ease-out;
+    transition: opacity var(--close-timeout, 0ms) ease;
+
+    &.isClosing {
+        opacity: 0;
+    }
 }
 
 .modal {
@@ -19,5 +47,45 @@
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    position: relative;
+
+    opacity: 1;
+    transform: scale(1);
+    animation: scaleUp var(--close-timeout, 0ms) ease-out;
+    transition:
+        opacity var(--close-timeout, 0ms) ease,
+        transform var(--close-timeout, 0ms) ease;
+
+    &.isClosing {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+.actions {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .close-btn {
+        font-family: "Be Vietnam Pro", sans-serif;
+        padding: 8px 15px;
+        font-weight: 500;
+        color: #ffffff;
+        background-color: #18181b;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition:
+            background-color 0.15s ease,
+            transform 0.1s ease;
+
+        &:hover {
+            background-color: #27272a;
+        }
+
+        &:active {
+            transform: scale(0.97);
+        }
+    }
 }
