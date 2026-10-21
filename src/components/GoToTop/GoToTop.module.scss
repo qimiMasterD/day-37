@@ -1,0 +1,38 @@
+.btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+
+    background-color: #18181b;
+    color: #ffffff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        background-color 0.15s ease;
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    &:hover {
+        background-color: #27272a;
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
