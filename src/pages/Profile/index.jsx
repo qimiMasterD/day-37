@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./Profile.module.scss";
 
@@ -15,6 +15,11 @@ function Profile() {
             return currentPreview;
         });
     };
+
+    useEffect(
+        () => previewUrl && URL.revokeObjectURL(previewUrl),
+        [previewUrl],
+    );
 
     return (
         <div className={styles.container}>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 
@@ -12,26 +12,38 @@ function Modal({
     closeTimeoutMS = 0,
     overlayClassName,
     className,
-    bodyOpenClassName,
-    htmlOpenClassName,
+    bodyOpenClassName = "modal-open",
+    htmlOpenClassName = "modal-open",
     shouldCloseOnOverlayClick = true,
     shouldCloseOnEsc = true,
     children,
 }) {
     const [isClosing, setIsClosing] = useState(false);
 
+    const contentRef = useRef(null);
+    const closeTimer = useRef(null);
+
     // handle close function
     const handleClose = useCallback(() => {
+        if (closeTimer.current) clearTimeout(closeTimer.current);
+
         setIsClosing(true);
 
         const closeFunction = () => {
             onAfterClose();
             onRequestClose();
             setIsClosing(false);
+            closeTimer.current = null;
         };
         if (closeTimeoutMS === 0) closeFunction();
-        else setTimeout(closeFunction, closeTimeoutMS);
+        else closeTimer.current = setTimeout(closeFunction, closeTimeoutMS);
     }, [closeTimeoutMS, onRequestClose, onAfterClose]);
+    // clear closeTimer when the modal is unmounted
+    useEffect(() => {
+        return () => {
+            if (closeTimer.current) clearTimeout(closeTimer.current);
+        };
+    }, []);
 
     // handle close on ESC
     useEffect(() => {
@@ -67,7 +79,12 @@ function Modal({
 
     // function that is called when modal is open
     useEffect(() => {
-        if (isOpen) onAfterOpen();
+        if (!isOpen) return;
+
+        contentRef.current?.focus();
+        const timer = setTimeout(onAfterOpen, 300);
+
+        return () => clearTimeout(timer);
     }, [isOpen, onAfterOpen]);
 
     if (!isOpen) return null;
@@ -99,7 +116,9 @@ function Modal({
                         isClosing && styles.isClosing,
                     )}
                 >
-                    <div className={styles.content}>{children}</div>
+                    <div ref={contentRef} className={styles.content}>
+                        {children}
+                    </div>
                     <div className={styles.actions}>
                         <button
                             className={styles["close-btn"]}

@@ -107,6 +107,7 @@ function ModalDemo() {
             <Modal
                 isOpen={activeModal === "callbacks"}
                 onRequestClose={closeModal}
+                closeTimeoutMS={1000}
                 onAfterOpen={() => console.log("Callback: Modal ĐÃ MỞ!")}
                 onAfterClose={() => console.log("Callback: Modal ĐÃ ĐÓNG!")}
             >

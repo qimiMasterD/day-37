@@ -4,9 +4,10 @@ import Header from "./components/Header";
 
 function DefaultLayout() {
     return (
-        <div>
+        <>
             <Header></Header>
-        </div>
+            <Outlet />
+        </>
     );
 }
 

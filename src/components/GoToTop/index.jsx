@@ -7,6 +7,7 @@ function GoToTop() {
     const [rendering, setRendering] = useState(false);
     const [visible, setVisible] = useState(false);
     const timerRef = useRef(null);
+    const showTimerRef = useRef(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -17,17 +18,24 @@ function GoToTop() {
                     timerRef.current = null;
                 }
 
-                setRendering((prevRendering) => {
-                    if (!prevRendering) {
-                        setTimeout(() => {
-                            setVisible(true);
-                        }, 50);
-                    }
-                    return true;
-                });
+                setRendering(true);
+
+                if (!showTimerRef.current) {
+                    showTimerRef.current = setTimeout(() => {
+                        setVisible(true);
+                        showTimerRef.current = null;
+                    }, 50);
+                }
             } else {
                 if (timerRef.current) return;
+
                 setVisible(false);
+
+                if (showTimerRef.current) {
+                    clearTimeout(showTimerRef.current);
+                    showTimerRef.current = null;
+                }
+
                 timerRef.current = setTimeout(() => {
                     setRendering(false);
                     timerRef.current = null;
@@ -35,11 +43,13 @@ function GoToTop() {
             }
         };
 
-        document.addEventListener("scroll", handleScroll);
+        handleScroll();
+        window.addEventListener("scroll", handleScroll);
 
         return () => {
-            document.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("scroll", handleScroll);
             if (timerRef.current) clearTimeout(timerRef.current);
+            if (showTimerRef.current) clearTimeout(showTimerRef.current);
         };
     }, []);
 

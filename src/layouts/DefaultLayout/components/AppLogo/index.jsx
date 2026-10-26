@@ -15,7 +15,14 @@ function AppLogo() {
                     navigate("/");
                 }}
             />
-            <span className={styles["logo-text"]}>Học Lập Trình Để Đi Làm</span>
+            <span
+                className={styles["logo-text"]}
+                onClick={() => {
+                    navigate("/");
+                }}
+            >
+                Học Lập Trình Để Đi Làm
+            </span>
         </div>
     );
 }
