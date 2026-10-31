@@ -19,6 +19,15 @@
     align-items: flex-start;
 }
 
+.up {
+    z-index: 1000;
+}
+
+.btns {
+    display: flex;
+    gap: 10px;
+}
+
 .demoBtn {
     font-size: 1.8rem;
     padding: 10px 18px;

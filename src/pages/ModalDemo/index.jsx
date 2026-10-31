@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./ModalDemo.module.scss";
 import Modal from "../../components/Modal";
+import clsx from "clsx";
 
 function ModalDemo() {
     const [activeModal, setActiveModal] = useState(null);
 
-    const openModal = (modalName) => setActiveModal(modalName);
+    let timerRef = useRef(null);
+    const openModal = (modalName) => {
+        if (timerRef.current) {
+            clearTimeout(timerRef.current);
+            timerRef.current = null;
+        }
+        setActiveModal(modalName);
+    };
     const closeModal = () => setActiveModal(null);
+
+    const modalRef = useRef(null);
 
     return (
         <div className={styles.container}>
@@ -49,6 +59,41 @@ function ModalDemo() {
                 >
                     6. Modal với callbacks (Check Console)
                 </button>
+                <div
+                    className={clsx(
+                        styles.btns,
+                        activeModal === "ref" ? styles.up : "",
+                    )}
+                >
+                    <button
+                        className={styles.demoBtn}
+                        onClick={() => {
+                            modalRef.current?.open();
+                            openModal("ref");
+                        }}
+                    >
+                        Open
+                    </button>
+                    <button
+                        className={styles.demoBtn}
+                        onClick={() => {
+                            modalRef.current?.close();
+                            timerRef.current = setTimeout(() => {
+                                closeModal();
+                            }, 300);
+                        }}
+                    >
+                        Close
+                    </button>
+                    <button
+                        className={styles.demoBtn}
+                        onClick={() => {
+                            modalRef.current?.toggle();
+                        }}
+                    >
+                        Toggle
+                    </button>
+                </div>
             </div>
 
             <Modal isOpen={activeModal === "basic"} onRequestClose={closeModal}>
@@ -107,7 +152,7 @@ function ModalDemo() {
             <Modal
                 isOpen={activeModal === "callbacks"}
                 onRequestClose={closeModal}
-                closeTimeoutMS={1000}
+                closeTimeoutMS={500}
                 onAfterOpen={() => console.log("Callback: Modal ĐÃ MỞ!")}
                 onAfterClose={() => console.log("Callback: Modal ĐÃ ĐÓNG!")}
             >
@@ -116,6 +161,15 @@ function ModalDemo() {
                     Bật DevTools Console (F12) để xem log được in ra khi mở và
                     đóng Modal này.
                 </p>
+            </Modal>
+
+            <Modal
+                isOpen={activeModal === "ref"}
+                ref={modalRef}
+                closeTimeoutMS={300}
+            >
+                <h2>Ref Modal</h2>
+                <p>Điều khiển thông qua ref.</p>
             </Modal>
         </div>
     );

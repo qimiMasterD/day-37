@@ -5,6 +5,7 @@ import Home from "../../pages/Home";
 import Profile from "../../pages/Profile";
 import ModalDemo from "../../pages/ModalDemo";
 import ScrollDemo from "../../pages/ScrollDemo";
+import FocusDemo from "../../pages/FocusDemo";
 import PerformanceDemo from "../../pages/PerformanceDemo";
 
 function AppRoutes() {
@@ -17,6 +18,7 @@ function AppRoutes() {
                 <Route path="/profile" element={<Profile />}></Route>
                 <Route path="/modal-demo" element={<ModalDemo />}></Route>
                 <Route path="/scroll-demo" element={<ScrollDemo />}></Route>
+                <Route path="/focus-demo" element={<FocusDemo />}></Route>
                 <Route
                     path="/performance-demo"
                     element={<PerformanceDemo />}

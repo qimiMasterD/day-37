@@ -1,24 +1,39 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+    forwardRef,
+    useImperativeHandle,
+} from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 
 import styles from "./Modal.module.scss";
 
-function Modal({
-    isOpen = false,
-    onAfterOpen = () => {},
-    onAfterClose = () => {},
-    onRequestClose = () => {},
-    closeTimeoutMS = 0,
-    overlayClassName,
-    className,
-    bodyOpenClassName = "modal-open",
-    htmlOpenClassName = "modal-open",
-    shouldCloseOnOverlayClick = true,
-    shouldCloseOnEsc = true,
-    children,
-}) {
+function Modal(
+    {
+        isOpen: _isOpen = false,
+        onAfterOpen = () => {},
+        onAfterClose = () => {},
+        onRequestClose = () => {},
+        closeTimeoutMS = 0,
+        overlayClassName,
+        className,
+        bodyOpenClassName = "modal-open",
+        htmlOpenClassName = "modal-open",
+        shouldCloseOnOverlayClick = true,
+        shouldCloseOnEsc = true,
+        children,
+    },
+    ref,
+) {
     const [isClosing, setIsClosing] = useState(false);
+    const [isOpen, setIsOpen] = useState(_isOpen);
+
+    useEffect(() => {
+        setIsOpen(_isOpen);
+    }, [_isOpen]);
 
     const contentRef = useRef(null);
     const closeTimer = useRef(null);
@@ -33,6 +48,7 @@ function Modal({
             onAfterClose();
             onRequestClose();
             setIsClosing(false);
+            setIsOpen(false);
             closeTimer.current = null;
         };
         if (closeTimeoutMS === 0) closeFunction();
@@ -44,6 +60,21 @@ function Modal({
             if (closeTimer.current) clearTimeout(closeTimer.current);
         };
     }, []);
+
+    useImperativeHandle(ref, () => {
+        return {
+            open: () => {
+                setIsOpen(true);
+            },
+            close: () => {
+                handleClose();
+            },
+            toggle: () => {
+                if (isOpen) handleClose();
+                else setIsOpen(true);
+            },
+        };
+    }, [handleClose, isOpen]);
 
     // handle close on ESC
     useEffect(() => {
@@ -148,4 +179,4 @@ Modal.propTypes = {
     shouldCloseOnEsc: PropTypes.bool,
 };
 
-export default Modal;
+export default forwardRef(Modal);
